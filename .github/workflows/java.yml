@@ -1,0 +1,25 @@
+name: Build All Microservices
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Build bank-gateway
+        run: mvn -f bank-gateway/pom.xml --batch-mode --update-snapshots clean package
+
+      - name: Build bank-service
+        run: mvn -f bank-service/pom.xml --batch-mode --update-snapshots clean package
+
+      - name: Build bank-storage
+        run: mvn -f bank-storage/pom.xml --batch-mode --update-snapshots clean package
