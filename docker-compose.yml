@@ -60,9 +60,9 @@ services:
     ports:
       - "8080:8080"
 
-  gateway:
+  bank-gateway:
     build:
-      context: ./gateway
+      context: ./bank-gateway
     depends_on:
       - kafka
       - postgres_gateway
@@ -75,9 +75,9 @@ services:
     ports:
       - "8081:8081"
 
-  storage:
+  bank-storage:
     build:
-      context: ./storage
+      context: ./bank-storage
     depends_on:
       - kafka
       - postgres_storage
