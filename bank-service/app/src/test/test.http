@@ -1,0 +1,99 @@
+### Создание пользователя artem
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "login": "artem",
+  "name": "Артем",
+  "age": 21,
+  "gender": "M",
+  "hairColor": "BROWN"
+}
+
+### Создание пользователя sasha
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "login": "sasha",
+  "name": "Саша",
+  "age": 25,
+  "gender": "F",
+  "hairColor": "BLOND"
+}
+
+### Добавление друга
+POST http://localhost:8080/users/artem/friends/sasha
+
+### Получение друзей artem
+GET http://localhost:8080/users/artem/friends
+
+### Фильтрация пользователей по полу и цвету волос
+GET http://localhost:8080/users?gender=F&hairColor=BLOND
+
+### Создание счёта для artem
+POST http://localhost:8080/accounts
+Content-Type: application/json
+
+{
+  "id": "acc1",
+  "ownerLogin": "artem"
+}
+
+### Создание счёта для sasha
+POST http://localhost:8080/accounts
+Content-Type: application/json
+
+{
+  "id": "acc2",
+  "ownerLogin": "sasha"
+}
+
+### Получение счетов пользователя artem
+GET http://localhost:8080/accounts/user/artem
+
+### Пополнение счёта acc1
+POST http://localhost:8080/accounts/acc1/deposit?amount=1000
+
+### Перевод 100 от acc1 к acc2
+POST http://localhost:8080/accounts/transfer
+Content-Type: application/json
+
+{
+  "fromId": "acc1",
+  "toId": "acc2",
+  "amount": 100
+}
+
+### Проверка баланса acc1
+GET http://localhost:8080/accounts/acc1
+
+### Проверка баланса acc2
+GET http://localhost:8080/accounts/acc2
+
+### История операций acc1 (все)
+GET http://localhost:8080/accounts/acc1/operations
+
+### История операций acc1 (только DEPOSIT)
+GET http://localhost:8080/accounts/acc1/operations?type=ПОПОЛНЕНИЕ
+
+### История операций acc2 (только WITHDRAW)
+GET http://localhost:8080/accounts/acc2/operations?type=СНЯТИЕ
+
+### Попробуем создать пользователя с пустым логином (ожидаем 400)
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "login": "",
+  "name": "Некорректный",
+  "age": 20,
+  "gender": "M",
+  "hairColor": "BLACK"
+}
+
+### Удаление пользователя artem
+DELETE http://localhost:8080/users/artem
+
+### Удаление пользователя sasha
+DELETE http://localhost:8080/users/sasha
