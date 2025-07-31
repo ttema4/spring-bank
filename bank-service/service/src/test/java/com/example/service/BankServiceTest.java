@@ -1,7 +1,6 @@
 package com.example.service;
 
 import com.example.domain.Account;
-import com.example.domain.User;
 import com.example.kafka.producer.KafkaProducerService;
 import com.example.repository.AccountJpaRepository;
 import com.example.repository.UserJpaRepository;
